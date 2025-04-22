@@ -1,0 +1,44 @@
+:host ::ng-deep {
+  .accordion {
+    .accordion-item {
+      border-radius: 0.375rem;
+      overflow: hidden;
+
+      .accordion-header {
+        padding: 0;
+        margin: 0;
+        border: none;
+
+        dr-button {
+          width: 100%;
+          text-align: left;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .bi {
+          font-size: 1.25rem;
+          transition: transform 0.3s ease;
+        }
+
+        .rotate {
+          transform: rotate(180deg);
+        }
+      }
+
+      .accordion-body {
+        padding: 1rem;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    &.flush .accordion-item {
+      border: none;
+
+      .accordion-body {
+        border-top: none;
+      }
+    }
+  }
+}

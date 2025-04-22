@@ -3,5 +3,124 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "drux-ui": {
+      "projectType": "library",
+      "root": "projects/drux-ui",
+      "sourceRoot": "projects/drux-ui/src",
+      "prefix": "dr",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/drux-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/drux-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/drux-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/drux-ui/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"]
+          }
+        }
+      }
+    },
+    "drux-showcase": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/drux-showcase",
+      "sourceRoot": "projects/drux-showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/drux-showcase",
+            "index": "projects/drux-showcase/src/index.html",
+            "browser": "projects/drux-showcase/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/drux-showcase/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/drux-showcase/public"
+              }
+            ],
+            "styles": [
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "projects/drux-showcase/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "drux-showcase:build:production"
+            },
+            "development": {
+              "buildTarget": "drux-showcase:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/drux-showcase/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/drux-showcase/public"
+              }
+            ],
+            "styles": ["projects/drux-showcase/src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    }
   }
 }

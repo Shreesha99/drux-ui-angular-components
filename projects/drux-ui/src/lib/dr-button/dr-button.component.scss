@@ -1,0 +1,27 @@
+:host ::ng-deep button {
+  position: relative;
+
+  &.icon-only {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.rounded-pill {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .drux-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    font-size: 0.65rem;
+    padding: 0.25em 0.5em;
+    border-radius: 10rem;
+  }
+}

@@ -1,0 +1,10 @@
+<!-- Simple Input Only -->
+<input
+  class="form-control"
+  [type]="type"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  [value]="inputValue()"
+  (input)="onInput($event)"
+  drRequired
+/>

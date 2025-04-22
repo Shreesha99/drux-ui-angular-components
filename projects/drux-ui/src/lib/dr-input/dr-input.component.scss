@@ -1,0 +1,22 @@
+input.form-control {
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+    &:focus {
+      border-color: #86b7fe;
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+  
+    &:disabled {
+      background-color: #e9ecef;
+      opacity: 1;
+    }
+    
+    .is-required {
+      border-left: 4px solid red;
+    }
+  }
+  

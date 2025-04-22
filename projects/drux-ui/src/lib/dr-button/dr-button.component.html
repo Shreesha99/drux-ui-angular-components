@@ -1,0 +1,15 @@
+<button
+  [attr.type]="nativeType"
+  [class]="classes + ' position-relative'"
+  [disabled]="disabled || loading"
+  (click)="onClick()"
+  [attr.aria-label]="ariaLabel"
+>
+  @if (loading) {
+    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+  }
+
+  @if (label) {
+    {{ label }}
+  }
+</button>

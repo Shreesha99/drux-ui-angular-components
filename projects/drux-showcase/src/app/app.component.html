@@ -1,0 +1,91 @@
+<div class="container mt-5">
+  <h1>Drux UI Showcase</h1>
+
+  <div class="mb-4">
+    <label class="form-label">Text Input:</label>
+    <dr-input
+      placeholder="Enter text..."
+      [value]="name()"
+      (valueChange)="onNameChange($event)"
+      drRequired
+    ></dr-input>
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label">Number Input:</label>
+    <dr-input
+      type="number"
+      placeholder="Enter number..."
+      (valueChange)="onNameChange($event)"
+    ></dr-input>
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label">Password Input:</label>
+    <dr-input
+      type="password"
+      placeholder="Enter password..."
+      (valueChange)="onNameChange($event)"
+    ></dr-input>
+  </div>
+
+  <p class="mt-2">
+    You typed: <strong>{{ name() }}</strong>
+  </p>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Drux UI Button Variants</h2>
+    <div class="row mb-4">
+      <div class="col"><dr-button label="Primary" type="primary"></dr-button></div>
+      <div class="col"><dr-button label="Secondary" type="secondary"></dr-button></div>
+      <div class="col"><dr-button label="Success" type="success"></dr-button></div>
+      <div class="col"><dr-button label="Danger" type="danger"></dr-button></div>
+      <div class="col"><dr-button label="Warning" type="warning"></dr-button></div>
+      <div class="col"><dr-button label="Info" type="info"></dr-button></div>
+      <div class="col"><dr-button label="Light" type="light"></dr-button></div>
+      <div class="col"><dr-button label="Dark" type="dark"></dr-button></div>
+    </div>
+  
+    <h2 class="mb-4">Button Sizes</h2>
+    <div class="row mb-4">
+      <div class="col"><dr-button label="Small" size="sm"></dr-button></div>
+      <div class="col"><dr-button label="Medium" size="md"></dr-button></div>
+      <div class="col"><dr-button label="Large" size="lg"></dr-button></div>
+    </div>
+  
+    <h2 class="mb-4">Loading Buttons</h2>
+    <div class="row mb-4">
+      <div class="col"><dr-button label="Loading..." type="primary" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="secondary" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="success" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="danger" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="warning" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="info" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="light" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="dark" [loading]="true"></dr-button></div>
+    </div>
+  
+    <h2 class="mb-4">Block Button</h2>
+    <div class="mb-4">
+      <dr-button label="Block Level Button" [block]="true"></dr-button>
+    </div>
+
+    <dr-accordion title="What is Drux UI?">
+      <p class="mt-2">
+        Drux UI is a modern, Bootstrap-based Angular component library built with standalone components, SCSS styling, and Angular 17+ features like signals and zoneless design.
+      </p>
+    </dr-accordion>
+    
+    <dr-accordion title="Why use Drux UI?" [expanded]="true">
+      <ul class="mt-2">
+        <li>✅ Lightweight and fast</li>
+        <li>🎨 Bootstrap-powered styling</li>
+        <li>🧩 Fully standalone components</li>
+        <li>🪄 Works great with Angular 17+</li>
+      </ul>
+    </dr-accordion>
+    
+  </div>
+  
+  
+</div>
