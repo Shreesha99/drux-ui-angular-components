@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { DrButtonComponent, DrInputComponent } from '@drux-ui/angular';
+import { DrButtonComponent, DrInputComponent } from 'drux-ui-angular';
 import { DrAccordionComponent } from '../../../drux-ui/src/lib/dr-accordion/dr-accordion.component';
 
 @Component({
