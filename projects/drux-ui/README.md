@@ -16,7 +16,7 @@ It follows **Bootstrap styling**, supports **modern Angular features**, and is b
 
 ---
 
-## ✨ What’s New in v0.0.6
+## ✨ What’s New in v0.0.7
 
 - Internal versioning updates
 
