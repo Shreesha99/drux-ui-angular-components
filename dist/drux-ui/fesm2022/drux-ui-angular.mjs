@@ -1,7 +1,7 @@
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { signal, Input, Component, Directive, EventEmitter, Output } from '@angular/core';
+import { signal, Input, Component, Directive, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
 class DrButtonComponent {
     label = 'Click Me';
@@ -181,9 +181,41 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
                 type: Input
             }] } });
 
+class DrIconComponent {
+    name = '';
+    size = 'md';
+    color;
+    ariaHidden = 'true';
+    get computedClasses() {
+        const sizeMap = {
+            sm: 'fs-6',
+            md: 'fs-5',
+            lg: 'fs-4',
+            xl: 'fs-3',
+        };
+        const base = this.name.trim(); // e.g., 'bi bi-x-circle'
+        const sizeClass = sizeMap[this.size] ?? 'fs-5';
+        return [base, sizeClass];
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrIconComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.7", type: DrIconComponent, isStandalone: true, selector: "dr-icon", inputs: { name: "name", size: "size", color: "color", ariaHidden: "ariaHidden" }, ngImport: i0, template: "<i\r\nclass=\"drux-icon\"\r\n[ngClass]=\"computedClasses\"\r\n[attr.aria-hidden]=\"ariaHidden\"\r\n></i>", styles: [".drux-icon{display:inline-block;vertical-align:middle;color:inherit}\n"], dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }], changeDetection: i0.ChangeDetectionStrategy.OnPush });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrIconComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'dr-icon', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, imports: [CommonModule], template: "<i\r\nclass=\"drux-icon\"\r\n[ngClass]=\"computedClasses\"\r\n[attr.aria-hidden]=\"ariaHidden\"\r\n></i>", styles: [".drux-icon{display:inline-block;vertical-align:middle;color:inherit}\n"] }]
+        }], propDecorators: { name: [{
+                type: Input
+            }], size: [{
+                type: Input
+            }], color: [{
+                type: Input
+            }], ariaHidden: [{
+                type: Input
+            }] } });
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { DrAccordionComponent, DrButtonComponent, DrInputComponent };
+export { DrAccordionComponent, DrButtonComponent, DrIconComponent, DrInputComponent };
 //# sourceMappingURL=drux-ui-angular.mjs.map

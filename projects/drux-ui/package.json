@@ -1,6 +1,6 @@
 {
   "name": "drux-ui-angular",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "peerDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0"
@@ -8,5 +8,26 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "angular",
+    "angular-components",
+    "angular-ui",
+    "component-library",
+    "bootstrap",
+    "bootstrap-styled",
+    "ui-kit",
+    "angular-ui-library",
+    "ng-ui",
+    "ng-bootstrap",
+    "drux-ui",
+    "angular17",
+    "angular17-components",
+    "angular-design-system",
+    "angular-ui-kit",
+    "bootstrap-angular",
+    "web-components",
+    "frontend-library",
+    "reusable-components"
+  ]
 }
