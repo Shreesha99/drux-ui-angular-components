@@ -23,7 +23,7 @@ export class DrIconComponent {
       xl: 'fs-3',
     };
 
-    const base = this.name.trim(); // e.g., 'bi bi-x-circle'
+    const base = this.name.trim(); 
     const sizeClass = sizeMap[this.size] ?? 'fs-5';
     return [base, sizeClass];
   }
