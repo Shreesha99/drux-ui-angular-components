@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
-import { DrRequiredDirective } from '../directives/required.directive';
+import { DrRequiredDirective } from '../../directives/required.directive';
 
 type InputType = 'text' | 'number' | 'password';
 

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, signal } from '@angular/core';
-import { DrButtonComponent } from '../dr-button/dr-button.component';
+import { DrButtonComponent } from '../essentials/dr-button/dr-button.component';
 
 @Component({
   selector: 'dr-accordion',

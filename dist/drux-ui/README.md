@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/drux-ui-angular.svg)](https://www.npmjs.com/package/drux-ui-angular)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Version:** `0.0.6`  
+**Version:** `0.0.8`  
 **Angular Compatibility:** `17.2+`  
 **Style:** Bootstrap-based (via CDN) + SCSS  
 **Modern Angular Features:** Standalone Components · Signals · `loadComponent` · No Modules
@@ -16,9 +16,9 @@ It follows **Bootstrap styling**, supports **modern Angular features**, and is b
 
 ---
 
-## ✨ What’s New in v0.0.7
+## ✨ What’s New in v0.0.8
 
-- Internal versioning updates
+- Migrating the components to relevant folders
 
 ---
 

@@ -51,6 +51,10 @@
       <div class="col"><dr-button label="Small" size="sm"></dr-button></div>
       <div class="col"><dr-button label="Medium" size="md"></dr-button></div>
       <div class="col"><dr-button label="Large" size="lg"></dr-button></div>
+      <div class="col"><dr-button label="reset" size="lg" [nativeType]="'submit'"></dr-button></div>
+      <div class="col"><dr-button label="Large" size="lg" [outlined]="true"></dr-button></div>
+      <div class="col"><dr-button label="Large" size="lg" [raised]="true"></dr-button></div>
+      <div class="col"><dr-button ariaLabel="tttt" label="s" size="lg" [raised]="true"></dr-button></div>
     </div>
   
     <h2 class="mb-4">Loading Buttons</h2>
@@ -63,6 +67,7 @@
       <div class="col"><dr-button label="Loading..." type="info" [loading]="true"></dr-button></div>
       <div class="col"><dr-button label="Loading..." type="light" [loading]="true"></dr-button></div>
       <div class="col"><dr-button label="Loading..." type="dark" [loading]="true"></dr-button></div>
+      <div class="col"><dr-button label="Loading..." type="dark" [loading]="true" [text]="true"></dr-button></div>
     </div>
   
     <h2 class="mb-4">Block Button</h2>
