@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.textarea-wrapper {
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  transition: all 0.2s ease;
+  resize: vertical; // Show native handle by default
+
+  &.auto-resize {
+    overflow: hidden;
+    resize: none; // Hide native handle when auto-resizing
+  }
+}
+
+.invalid-feedback {
+  font-size: 0.875rem;
+  color: #dc3545;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.text-muted {
+  color: #6c757d;
+}
+
+small {
+  font-size: 0.875rem;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+}
+
+textarea[readonly] {
+  background-color: #f8f9fa;
+}
+
+textarea:disabled {
+  background-color: #e9ecef;
+}

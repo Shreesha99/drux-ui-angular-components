@@ -1,7 +1,9 @@
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { signal, Input, Component, Directive, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { signal, Input, Component, Directive, EventEmitter, Output, ChangeDetectionStrategy, computed, ViewChild } from '@angular/core';
+import * as i2 from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 class DrButtonComponent {
     label = 'Click Me';
@@ -193,7 +195,7 @@ class DrIconComponent {
             lg: 'fs-4',
             xl: 'fs-3',
         };
-        const base = this.name.trim(); // e.g., 'bi bi-x-circle'
+        const base = this.name.trim();
         const sizeClass = sizeMap[this.size] ?? 'fs-5';
         return [base, sizeClass];
     }
@@ -213,9 +215,144 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
                 type: Input
             }] } });
 
+class ShowCharCountDirective {
+    el;
+    renderer;
+    model = '';
+    maxLength = null;
+    constructor(el, renderer) {
+        this.el = el;
+        this.renderer = renderer;
+    }
+    ngOnChanges() {
+        const currentLength = this.model?.length ?? 0;
+        const maxLength = this.maxLength ?? 0;
+        const percentage = Math.min((currentLength / maxLength) * 100, 100);
+        if (percentage >= 90) {
+            this.renderer.setStyle(this.el.nativeElement, 'color', '#dc3545'); // red
+        }
+        else if (percentage >= 70) {
+            this.renderer.setStyle(this.el.nativeElement, 'color', '#ffc107'); // yellow
+        }
+        else {
+            this.renderer.setStyle(this.el.nativeElement, 'color', '#6c757d'); // muted
+        }
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ShowCharCountDirective, deps: [{ token: i0.ElementRef }, { token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Directive });
+    static ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.2.7", type: ShowCharCountDirective, isStandalone: true, selector: "[showCharCount]", inputs: { model: "model", maxLength: "maxLength" }, usesOnChanges: true, ngImport: i0 });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: ShowCharCountDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: '[showCharCount]',
+                    standalone: true,
+                }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i0.Renderer2 }], propDecorators: { model: [{
+                type: Input
+            }], maxLength: [{
+                type: Input
+            }] } });
+
+class DrTextareaComponent {
+    renderer;
+    _model = '';
+    label = '';
+    placeholder = '';
+    rows = 3;
+    disabled = false;
+    readonly = false;
+    required = false;
+    error = '';
+    maxLength = null;
+    set model(val) {
+        this._model = val;
+        this.modelSignal.set(val);
+    }
+    get model() {
+        return this._model;
+    }
+    modelChange = new EventEmitter();
+    set showCharCount(val) {
+        this._showCharCount = this.coerceBoolean(val);
+    }
+    get showCharCount() {
+        return this._showCharCount;
+    }
+    _showCharCount = false;
+    set autoResize(val) {
+        this._autoResize = this.coerceBoolean(val);
+    }
+    get autoResize() {
+        return this._autoResize;
+    }
+    _autoResize = false;
+    textareaRef;
+    focused = signal(false);
+    modelSignal = signal('');
+    charCount = computed(() => this.modelSignal().length);
+    constructor(renderer) {
+        this.renderer = renderer;
+    }
+    ngAfterContentInit() {
+        if (this.autoResize && this.textareaRef) {
+            this.adjustHeight();
+        }
+    }
+    onInput() {
+        if (this.autoResize) {
+            this.adjustHeight();
+        }
+    }
+    onModelChange(val) {
+        this.model = val;
+        this.modelChange.emit(val);
+    }
+    adjustHeight() {
+        const textarea = this.textareaRef.nativeElement;
+        this.renderer.setStyle(textarea, 'height', 'auto');
+        this.renderer.setStyle(textarea, 'height', `${textarea.scrollHeight}px`);
+    }
+    coerceBoolean(value) {
+        return value !== null && value !== false && `${value}` !== 'false';
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrTextareaComponent, deps: [{ token: i0.Renderer2 }], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.2.7", type: DrTextareaComponent, isStandalone: true, selector: "dr-textarea", inputs: { label: "label", placeholder: "placeholder", rows: "rows", disabled: "disabled", readonly: "readonly", required: "required", error: "error", maxLength: "maxLength", model: "model", showCharCount: "showCharCount", autoResize: "autoResize" }, outputs: { modelChange: "modelChange" }, viewQueries: [{ propertyName: "textareaRef", first: true, predicate: ["textareaRef"], descendants: true }], ngImport: i0, template: "<div class=\"form-group mb-3 position-relative\">\r\n  @if (label) {\r\n    <label class=\"form-label\">{{ label }}</label>\r\n  }\r\n\r\n  <div class=\"textarea-wrapper d-flex align-items-start\">\r\n    <ng-content select=\"[textareaPrefix]\"></ng-content>\r\n\r\n    <textarea\r\n      #textareaRef\r\n      class=\"form-control\"\r\n      [ngClass]=\"{ 'auto-resize': autoResize }\"\r\n      [attr.placeholder]=\"placeholder\"\r\n      [rows]=\"rows\"\r\n      [disabled]=\"disabled\"\r\n      [readonly]=\"readonly\"\r\n      [(ngModel)]=\"model\"\r\n      (ngModelChange)=\"onModelChange($event)\"\r\n      (focus)=\"focused.set(true)\"\r\n      (blur)=\"focused.set(false)\"\r\n      (input)=\"onInput()\"\r\n      [attr.maxLength]=\"maxLength ?? null\"\r\n      [attr.aria-invalid]=\"!!error\"\r\n      [required]=\"required\"\r\n    ></textarea>\r\n\r\n    <ng-content select=\"[textareaSuffix]\"></ng-content>\r\n  </div>\r\n\r\n  @if (error) {\r\n    <div class=\"invalid-feedback d-block\">{{ error }}</div>\r\n  }\r\n\r\n  @if (showCharCount && maxLength) {\r\n    <div class=\"text-end small text-muted mt-1\">\r\n      <div class=\"char-count\" showCharCount [model]=\"model\" [maxLength]=\"maxLength\">\r\n        {{ charCount() }} / {{ maxLength }}\r\n      </div>\r\n    </div>\r\n  }\r\n</div>\r\n", styles: [":host{display:block;width:100%}.form-group{margin-bottom:1rem}.textarea-wrapper{position:relative}textarea{width:100%;transition:all .2s ease;resize:vertical}textarea.auto-resize{overflow:hidden;resize:none}.invalid-feedback{font-size:.875rem;color:#dc3545}.text-end{text-align:end}.text-muted{color:#6c757d}small{font-size:.875rem}textarea:focus{outline:none;border-color:#007bff;box-shadow:0 0 0 .25rem #268fff40}textarea[readonly]{background-color:#f8f9fa}textarea:disabled{background-color:#e9ecef}\n"], dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "ngmodule", type: FormsModule }, { kind: "directive", type: i2.DefaultValueAccessor, selector: "input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]" }, { kind: "directive", type: i2.NgControlStatus, selector: "[formControlName],[ngModel],[formControl]" }, { kind: "directive", type: i2.RequiredValidator, selector: ":not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]", inputs: ["required"] }, { kind: "directive", type: i2.NgModel, selector: "[ngModel]:not([formControlName]):not([formControl])", inputs: ["name", "disabled", "ngModel", "ngModelOptions"], outputs: ["ngModelChange"], exportAs: ["ngModel"] }, { kind: "directive", type: ShowCharCountDirective, selector: "[showCharCount]", inputs: ["model", "maxLength"] }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrTextareaComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'dr-textarea', standalone: true, imports: [CommonModule, FormsModule, ShowCharCountDirective], template: "<div class=\"form-group mb-3 position-relative\">\r\n  @if (label) {\r\n    <label class=\"form-label\">{{ label }}</label>\r\n  }\r\n\r\n  <div class=\"textarea-wrapper d-flex align-items-start\">\r\n    <ng-content select=\"[textareaPrefix]\"></ng-content>\r\n\r\n    <textarea\r\n      #textareaRef\r\n      class=\"form-control\"\r\n      [ngClass]=\"{ 'auto-resize': autoResize }\"\r\n      [attr.placeholder]=\"placeholder\"\r\n      [rows]=\"rows\"\r\n      [disabled]=\"disabled\"\r\n      [readonly]=\"readonly\"\r\n      [(ngModel)]=\"model\"\r\n      (ngModelChange)=\"onModelChange($event)\"\r\n      (focus)=\"focused.set(true)\"\r\n      (blur)=\"focused.set(false)\"\r\n      (input)=\"onInput()\"\r\n      [attr.maxLength]=\"maxLength ?? null\"\r\n      [attr.aria-invalid]=\"!!error\"\r\n      [required]=\"required\"\r\n    ></textarea>\r\n\r\n    <ng-content select=\"[textareaSuffix]\"></ng-content>\r\n  </div>\r\n\r\n  @if (error) {\r\n    <div class=\"invalid-feedback d-block\">{{ error }}</div>\r\n  }\r\n\r\n  @if (showCharCount && maxLength) {\r\n    <div class=\"text-end small text-muted mt-1\">\r\n      <div class=\"char-count\" showCharCount [model]=\"model\" [maxLength]=\"maxLength\">\r\n        {{ charCount() }} / {{ maxLength }}\r\n      </div>\r\n    </div>\r\n  }\r\n</div>\r\n", styles: [":host{display:block;width:100%}.form-group{margin-bottom:1rem}.textarea-wrapper{position:relative}textarea{width:100%;transition:all .2s ease;resize:vertical}textarea.auto-resize{overflow:hidden;resize:none}.invalid-feedback{font-size:.875rem;color:#dc3545}.text-end{text-align:end}.text-muted{color:#6c757d}small{font-size:.875rem}textarea:focus{outline:none;border-color:#007bff;box-shadow:0 0 0 .25rem #268fff40}textarea[readonly]{background-color:#f8f9fa}textarea:disabled{background-color:#e9ecef}\n"] }]
+        }], ctorParameters: () => [{ type: i0.Renderer2 }], propDecorators: { label: [{
+                type: Input
+            }], placeholder: [{
+                type: Input
+            }], rows: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], readonly: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], error: [{
+                type: Input
+            }], maxLength: [{
+                type: Input
+            }], model: [{
+                type: Input
+            }], modelChange: [{
+                type: Output
+            }], showCharCount: [{
+                type: Input
+            }], autoResize: [{
+                type: Input
+            }], textareaRef: [{
+                type: ViewChild,
+                args: ['textareaRef']
+            }] } });
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { DrAccordionComponent, DrButtonComponent, DrIconComponent, DrInputComponent };
+export { DrAccordionComponent, DrButtonComponent, DrIconComponent, DrInputComponent, DrTextareaComponent };
 //# sourceMappingURL=drux-ui-angular.mjs.map

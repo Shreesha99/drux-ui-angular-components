@@ -1,0 +1,41 @@
+<div class="form-group mb-3 position-relative">
+  @if (label) {
+    <label class="form-label">{{ label }}</label>
+  }
+
+  <div class="textarea-wrapper d-flex align-items-start">
+    <ng-content select="[textareaPrefix]"></ng-content>
+
+    <textarea
+      #textareaRef
+      class="form-control"
+      [ngClass]="{ 'auto-resize': autoResize }"
+      [attr.placeholder]="placeholder"
+      [rows]="rows"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [(ngModel)]="model"
+      (ngModelChange)="onModelChange($event)"
+      (focus)="focused.set(true)"
+      (blur)="focused.set(false)"
+      (input)="onInput()"
+      [attr.maxLength]="maxLength ?? null"
+      [attr.aria-invalid]="!!error"
+      [required]="required"
+    ></textarea>
+
+    <ng-content select="[textareaSuffix]"></ng-content>
+  </div>
+
+  @if (error) {
+    <div class="invalid-feedback d-block">{{ error }}</div>
+  }
+
+  @if (showCharCount && maxLength) {
+    <div class="text-end small text-muted mt-1">
+      <div class="char-count" showCharCount [model]="model" [maxLength]="maxLength">
+        {{ charCount() }} / {{ maxLength }}
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,35 @@
+import { AfterContentInit, ElementRef, Renderer2, EventEmitter } from '@angular/core';
+import * as i0 from "@angular/core";
+export declare class DrTextareaComponent implements AfterContentInit {
+    private renderer;
+    private _model;
+    label: string;
+    placeholder: string;
+    rows: number;
+    disabled: boolean;
+    readonly: boolean;
+    required: boolean;
+    error: string;
+    maxLength: number | null;
+    set model(val: string);
+    get model(): string;
+    modelChange: EventEmitter<string>;
+    set showCharCount(val: any);
+    get showCharCount(): boolean;
+    private _showCharCount;
+    set autoResize(val: any);
+    get autoResize(): boolean;
+    private _autoResize;
+    textareaRef: ElementRef;
+    focused: import("@angular/core").WritableSignal<boolean>;
+    modelSignal: import("@angular/core").WritableSignal<string>;
+    charCount: import("@angular/core").Signal<number>;
+    constructor(renderer: Renderer2);
+    ngAfterContentInit(): void;
+    onInput(): void;
+    onModelChange(val: string): void;
+    private adjustHeight;
+    private coerceBoolean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<DrTextareaComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<DrTextareaComponent, "dr-textarea", never, { "label": { "alias": "label"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "rows": { "alias": "rows"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "readonly": { "alias": "readonly"; "required": false; }; "required": { "alias": "required"; "required": false; }; "error": { "alias": "error"; "required": false; }; "maxLength": { "alias": "maxLength"; "required": false; }; "model": { "alias": "model"; "required": false; }; "showCharCount": { "alias": "showCharCount"; "required": false; }; "autoResize": { "alias": "autoResize"; "required": false; }; }, { "modelChange": "modelChange"; }, never, ["[textareaPrefix]", "[textareaSuffix]"], true, never>;
+}

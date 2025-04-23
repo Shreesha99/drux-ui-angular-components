@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/drux-ui-angular.svg)](https://www.npmjs.com/package/drux-ui-angular)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Version:** `0.0.8`  
+**Version:** `0.0.9`  
 **Angular Compatibility:** `17.2+`  
 **Style:** Bootstrap-based (via CDN) + SCSS  
 **Modern Angular Features:** Standalone Components · Signals · `loadComponent` · No Modules
@@ -15,10 +15,24 @@ Drux UI is a simple and flexible UI component library made for **Angular 17+**.
 It follows **Bootstrap styling**, supports **modern Angular features**, and is built to help you get started quickly and design faster.
 
 ---
+## ✨ What’s New in v0.0.9
+ - ✅ Migrated existing components to organized folder structure
 
-## ✨ What’s New in v0.0.8
+ - 🆕 Added Textarea component with support for:
 
-- Migrating the components to relevant folders
+autoResize
+
+showCharCount
+
+maxLength
+
+disabled, readonly, required
+
+Validation error message
+
+Content projection (prefix and suffix)
+
+Reactive signals for char count and focus tracking
 
 ---
 
