@@ -1,0 +1,22 @@
+<div class="form-group mb-3 position-relative">
+    <div class="form-check">
+      <input
+        #checkboxRef
+        type="checkbox"
+        class="form-check-input"
+        [checked]="model"
+        [disabled]="disabled"
+        [required]="required"
+        (change)="onChange($event)"
+        (focus)="focused.set(true)"
+        (blur)="focused.set(false)"
+        [attr.aria-invalid]="!!error"
+      />
+      <label class="form-check-label" *ngIf="label">{{ label }}</label>
+    </div>
+  
+    <div *ngIf="error" class="invalid-feedback d-block mt-1">
+      {{ error }}
+    </div>
+  </div>
+  

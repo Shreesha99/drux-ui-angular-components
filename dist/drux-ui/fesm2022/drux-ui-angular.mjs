@@ -1,7 +1,7 @@
 import * as i1 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i0 from '@angular/core';
-import { signal, Input, Component, Directive, EventEmitter, Output, ChangeDetectionStrategy, computed, ViewChild } from '@angular/core';
+import { signal, Input, Component, Directive, EventEmitter, Output, ChangeDetectionStrategy, computed, ViewChild, effect } from '@angular/core';
 import * as i2 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -350,9 +350,59 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImpor
                 args: ['textareaRef']
             }] } });
 
+class DrCheckboxComponent {
+    _model = false;
+    label = '';
+    disabled = false;
+    required = false;
+    error = '';
+    set model(value) {
+        this._model = value;
+        this.modelSignal.set(value);
+    }
+    get model() {
+        return this._model;
+    }
+    modelChange = new EventEmitter();
+    checkboxRef;
+    focused = signal(false);
+    modelSignal = signal(false);
+    constructor() {
+        effect(() => {
+            this._model = this.modelSignal();
+        });
+    }
+    onChange(event) {
+        const checked = event.target.checked;
+        this.modelSignal.set(checked);
+        this.modelChange.emit(checked);
+    }
+    static ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrCheckboxComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+    static ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "19.2.7", type: DrCheckboxComponent, isStandalone: true, selector: "dr-checkbox", inputs: { label: "label", disabled: "disabled", required: "required", error: "error", model: "model" }, outputs: { modelChange: "modelChange" }, viewQueries: [{ propertyName: "checkboxRef", first: true, predicate: ["checkboxRef"], descendants: true }], ngImport: i0, template: "<div class=\"form-group mb-3 position-relative\">\r\n    <div class=\"form-check\">\r\n      <input\r\n        #checkboxRef\r\n        type=\"checkbox\"\r\n        class=\"form-check-input\"\r\n        [checked]=\"model\"\r\n        [disabled]=\"disabled\"\r\n        [required]=\"required\"\r\n        (change)=\"onChange($event)\"\r\n        (focus)=\"focused.set(true)\"\r\n        (blur)=\"focused.set(false)\"\r\n        [attr.aria-invalid]=\"!!error\"\r\n      />\r\n      <label class=\"form-check-label\" *ngIf=\"label\">{{ label }}</label>\r\n    </div>\r\n  \r\n    <div *ngIf=\"error\" class=\"invalid-feedback d-block mt-1\">\r\n      {{ error }}\r\n    </div>\r\n  </div>\r\n  ", styles: [":host{display:block;width:100%}.form-group{margin-bottom:1rem}.form-check-input:focus{border-color:#007bff;box-shadow:0 0 0 .2rem #007bff40}.invalid-feedback{font-size:.875rem;color:#dc3545}.form-check-input:disabled{background-color:#e9ecef}\n"], dependencies: [{ kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "ngmodule", type: FormsModule }] });
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.2.7", ngImport: i0, type: DrCheckboxComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'dr-checkbox', standalone: true, imports: [CommonModule, FormsModule], template: "<div class=\"form-group mb-3 position-relative\">\r\n    <div class=\"form-check\">\r\n      <input\r\n        #checkboxRef\r\n        type=\"checkbox\"\r\n        class=\"form-check-input\"\r\n        [checked]=\"model\"\r\n        [disabled]=\"disabled\"\r\n        [required]=\"required\"\r\n        (change)=\"onChange($event)\"\r\n        (focus)=\"focused.set(true)\"\r\n        (blur)=\"focused.set(false)\"\r\n        [attr.aria-invalid]=\"!!error\"\r\n      />\r\n      <label class=\"form-check-label\" *ngIf=\"label\">{{ label }}</label>\r\n    </div>\r\n  \r\n    <div *ngIf=\"error\" class=\"invalid-feedback d-block mt-1\">\r\n      {{ error }}\r\n    </div>\r\n  </div>\r\n  ", styles: [":host{display:block;width:100%}.form-group{margin-bottom:1rem}.form-check-input:focus{border-color:#007bff;box-shadow:0 0 0 .2rem #007bff40}.invalid-feedback{font-size:.875rem;color:#dc3545}.form-check-input:disabled{background-color:#e9ecef}\n"] }]
+        }], ctorParameters: () => [], propDecorators: { label: [{
+                type: Input
+            }], disabled: [{
+                type: Input
+            }], required: [{
+                type: Input
+            }], error: [{
+                type: Input
+            }], model: [{
+                type: Input
+            }], modelChange: [{
+                type: Output
+            }], checkboxRef: [{
+                type: ViewChild,
+                args: ['checkboxRef']
+            }] } });
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { DrAccordionComponent, DrButtonComponent, DrIconComponent, DrInputComponent, DrTextareaComponent };
+export { DrAccordionComponent, DrButtonComponent, DrCheckboxComponent, DrIconComponent, DrInputComponent, DrTextareaComponent };
 //# sourceMappingURL=drux-ui-angular.mjs.map

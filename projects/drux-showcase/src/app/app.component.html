@@ -230,5 +230,53 @@
   <span textareaSuffix class="ms-2">✏️</span>
 </dr-textarea>
 
+<!-- dr-checkbox-showcase.component.html -->
+<div class="container py-4">
+  <!-- 1. Basic Checkbox -->
+  <dr-checkbox
+    [(model)]="basicModel"
+    label="Basic Checkbox"
+  ></dr-checkbox>
+
+  <!-- 2. Required Checkbox -->
+  <dr-checkbox
+    [(model)]="requiredModel"
+    label="Required Checkbox"
+    [required]="true"
+    [error]="requiredModel ? '' : 'This field is required.'"
+  ></dr-checkbox>
+
+  <!-- 3. Disabled Checkbox -->
+  <dr-checkbox
+    [(model)]="disabledModel"
+    label="Disabled Checkbox"
+    [disabled]="true"
+  ></dr-checkbox>
+
+  <!-- 4. Pre-Checked Checkbox -->
+  <dr-checkbox
+    [(model)]="preCheckedModel"
+    label="Pre-checked Checkbox"
+  ></dr-checkbox>
+
+  <!-- 5. Checkbox with Long Label -->
+  <dr-checkbox
+    [(model)]="longLabelModel"
+    label="I understand and agree to all the terms, including the data processing policy, privacy conditions, and service limitations."
+  ></dr-checkbox>
+
+  <!-- 6. Dynamic Required + Disabled -->
+  <dr-checkbox
+    [(model)]="dynamicModel"
+    label="Dynamic Control"
+    [disabled]="isDisabled"
+    [required]="isRequired"
+    [error]="isRequired && !dynamicModel ? 'This is mandatory.' : ''"
+  ></dr-checkbox>
+
+  <!-- 7. Checkbox without Label -->
+  <dr-checkbox [(model)]="noLabelModel"></dr-checkbox>
+</div>
+
   </div>
 </div>

@@ -4,6 +4,7 @@ import { DrButtonComponent, DrInputComponent } from 'drux-ui-angular';
 import { DrAccordionComponent } from '../../../drux-ui/src/lib/dr-accordion/dr-accordion.component';
 import { DrIconComponent } from '../../../drux-ui/src/lib/essentials/dr-icon/dr-icon.component';
 import { DrTextareaComponent } from '../../../drux-ui/src/lib/essentials/dr-text-area/dr-text-area.component';
+import { DrCheckboxComponent } from '../../../drux-ui/src/lib/essentials/dr-checkbox/dr-checkbox.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { DrTextareaComponent } from '../../../drux-ui/src/lib/essentials/dr-text
     DrAccordionComponent,
     DrIconComponent,
     DrTextareaComponent,
+    DrCheckboxComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -34,4 +36,14 @@ export class AppComponent {
   resizableLimitedMessage = '';
   errorMessage = '';
   prefixedMessage = '';
+  basicModel = false;
+  requiredModel = false;
+  disabledModel = false;
+  preCheckedModel = true;
+  longLabelModel = false;
+  dynamicModel = false;
+  noLabelModel = false;
+
+  isDisabled = false;
+  isRequired = true;
 }
